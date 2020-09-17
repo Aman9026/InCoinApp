@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
-  final List currencies;
+  final List<dynamic> currencies;
   HomePage(this.currencies);
   @override
   _HomePageState createState() => _HomePageState();
 }
 
 class _HomePageState extends State<HomePage> {
-  List currencies;
+  List<dynamic> currencies;
   final List<MaterialColor> _colors = [
     Colors.blue,
     Colors.indigo,
@@ -20,7 +20,7 @@ class _HomePageState extends State<HomePage> {
     return new Scaffold(
       appBar: new AppBar(
         title: new Text("InCoin"),
-        //  elevation: defaultTargetPlatform == TargetPlatform.iOS ? 0.0 : 5.0,
+        // elevation: defaultTargetPlatform == TargetPlatform.iOS ? 0.0 : 5.0,
       ),
       body: _cryptoWidget(),
     );
@@ -28,13 +28,13 @@ class _HomePageState extends State<HomePage> {
 
   Widget _cryptoWidget() {
     return new Container(
-      child: Column(children: <Widget>[
+      child: new Column(children: <Widget>[
         new Flexible(
             child: new ListView.builder(
           itemCount: widget.currencies.length,
-          itemBuilder: (context, index) {
-            final Map currency = widget.currencies[index];
-            final MaterialColor color = _colors[index % _colors.length];
+          itemBuilder: (BuildContext context, int index) {
+            Map currency = widget.currencies[index];
+            MaterialColor color = _colors[index % _colors.length];
 
             return _getListItemUI(currency, color);
           },

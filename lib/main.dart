@@ -6,6 +6,7 @@ import 'dart:convert';
 
 void main() async {
   List currencies = await getCurrencies();
+  print(currencies.length);
   runApp(MyApp(currencies));
 }
 
@@ -19,7 +20,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'InCoin',
       theme: new ThemeData(
-          primarySwatch: Colors.amber[400],
+          primarySwatch: Colors.amber,
           primaryColor: defaultTargetPlatform == TargetPlatform.iOS
               ? Colors.blueGrey
               : null),
@@ -29,13 +30,19 @@ class MyApp extends StatelessWidget {
 }
 
 Future<List> getCurrencies() async {
-  String url = "https://pro-api.coinmarketcap.com/v1/ticker/?limit=50";
+  String url =
+      "https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest?start=1&limit=50";
   http.Response response = await http.get(
     url,
     headers: {
-      'X-CMC_PRO_API_KEY': 'd368fe79-158c-4bb6-b116-6ec4d323ea5f',
+      'X-CMC_PRO_API_KEY': 'Your API',
       "Accept": "application/json",
     },
   );
-  return json.decode(response.body);
+
+  // var x = json.decode(response.body)['data'];
+  // print(x);
+  return json.decode(response.body)['data'];
+
+  //return json.decode(response.body);
 }
